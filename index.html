@@ -1,0 +1,62 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+    <script src="googleSheets.js"></script>
+    <link rel="stylesheet" href="sample.css">
+  </head>
+  <body>
+    <center><h1>私のおすすめアイドル</h1>
+    <button id="mybtn"> 教えて！ </button>
+    <p id="contents"></p>
+    <p id="contents1"></p>
+    <p id="contents2"></p></center>
+
+
+    <script>
+      $(function () {
+        /* global $ loadSheets */
+        const sheetId = "1oHvF77ACdl_tG21ifOfNOCdfpphSZ6BiMSvVrlPVi28";
+        const range = "list!A1:E100";
+
+        $("#mybtn").on("click", showdata);
+        async function showdata() {
+          let data = await loadSheets(sheetId, range);
+          //console.log(data.values[0][0]);
+         
+          for(i=0;i<2;i++){
+            $("#contents").append(data.values[1][i]);
+            $("#contents").append("<br>");
+          }
+            $("#contents").append(
+              "<img height='150px' src='" + data.values[1][2] + "'/>"
+          );
+
+          for(i=0;i<2;i++){
+            $("#contents1").append(data.values[2][i]);
+            $("#contents1").append("<br>");
+          }
+            $("#contents1").append(
+              "<img height='150px' src='" + data.values[2][2] + "'/>"
+          );
+           
+          for(i=0;i<2;i++){
+            $("#contents2").append(data.values[3][i]);
+            $("#contents2").append("<br>");
+          }
+            $("#contents2").append(
+              "<img height='150px' src='" + data.values[3][2] + "'/>"
+          );
+         
+        }
+      });
+    </script>
+    <script
+      async
+      defer
+      src="https://apis.google.com/js/api.js"
+      onload="handleClientLoad()"
+      onreadystatechange="if (this.readyState === 'complete') this.onload()"
+    ></script>
+  </body>
+</html>
